@@ -1,6 +1,11 @@
 
 #include "ImmediateAtlasGenerator.h"
 
+#ifdef max
+#  undef max
+#endif
+
+
 #include <algorithm>
 
 namespace msdf_atlas {

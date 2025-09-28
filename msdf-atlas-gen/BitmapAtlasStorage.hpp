@@ -1,9 +1,14 @@
 
 #include "BitmapAtlasStorage.h"
 
+#ifdef min
+#undef min
+#endif
+
 #include <cstring>
 #include <algorithm>
 #include "bitmap-blit.h"
+#include <msdfgen.h>
 
 namespace msdf_atlas {
 
@@ -24,7 +29,7 @@ BitmapAtlasStorage<T, N>::BitmapAtlasStorage(msdfgen::Bitmap<T, N> &&bitmap) : b
 template <typename T, int N>
 BitmapAtlasStorage<T, N>::BitmapAtlasStorage(const BitmapAtlasStorage<T, N> &orig, int width, int height) : bitmap(width, height) {
     memset((T *) bitmap, 0, sizeof(T)*N*width*height);
-    blit(bitmap, orig.bitmap, 0, 0, 0, 0, std::min(width, orig.bitmap.width()), std::min(height, orig.bitmap.height()));
+    blit(bitmap, orig.bitmap, 0, 0, 0, 0, msdfgen::min(width, orig.bitmap.width()), msdfgen::min(height, orig.bitmap.height()));
 }
 
 template <typename T, int N>
